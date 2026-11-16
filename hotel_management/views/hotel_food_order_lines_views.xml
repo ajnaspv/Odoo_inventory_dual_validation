@@ -9,6 +9,7 @@
                 <field name="food_order_reference"/>
                 <field name="food_item_id"/>
                 <field name="food_qty"/>
+                <field name="currency_id" invisible="1"/>
                 <field name="price"/>
                 <field name="subtotal"/>
             </list>

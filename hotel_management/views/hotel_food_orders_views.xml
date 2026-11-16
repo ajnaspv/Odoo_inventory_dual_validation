@@ -55,7 +55,7 @@
                         <page string="Menu" invisible="status == 'confirmed'">
                             <group>
                                 <field name="category_ids" widget="many2many_tags"
-                                       placeholder="Select food categoriesss"/>
+                                       placeholder="Select food categories"/>
                             </group>
                             <field name="food_ids" mode="kanban" options="{'no_create_edit': True, 'no_open': True}"
                                    context="{'default_order_id': id, 'order_room_id':rm_id, 'food_order_reference' : food_order_reference}">
@@ -65,6 +65,7 @@
                                             <field name="category_id"/>
                                             <field name="image" widget="image" options="{'size': [60, 60]}"/>
                                             <field name="name" class="fw-bolder"/>
+                                            <field name="currency_id" invisible="1"/>
                                             <field name="price" class="text-muted"/>
                                         </t>
                                     </templates>
@@ -78,7 +79,9 @@
                                     <field name="food_order_reference"/>
                                     <field name="food_item_id"/>
                                     <field name="food_qty"/>
+                                    <field name="currency_id" invisible="1"/>
                                     <field name="price"/>
+                                    <field name="subtotal" sum="Total Amount"/>
                                 </list>
                             </field>
                         </page>

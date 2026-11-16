@@ -7,7 +7,7 @@ class HotelFoodOreders(models.Model):
     _description = 'Hotel Food Orders'
     _rec_name = 'accommodation_id'
 
-    accommodation_id = fields.Many2one('hotel.accommodation', readonly=False, domain="[('state', '=', 'check_in')]",required=True, string="Booking Id")
+    accommodation_id = fields.Many2one('hotel.accommodation', readonly=False, domain="[('state', '=', 'check_in')]",required=True, string="Booking Id", ondelete="cascade")
     rm_id = fields.Many2one('hotel.rooms', readonly=True, related='accommodation_id.room_id', string="Room Number")
     guest_name = fields.Char(string='Guest Name')
     order_date = fields.Datetime(string='Order Date',default=fields.Datetime.now, readonly=True)
@@ -17,6 +17,7 @@ class HotelFoodOreders(models.Model):
     food_order_reference = fields.Char(string='Order Reference', readonly=True, default=lambda self: _('New'), copy=False)
     status = fields.Selection([('cancelled', 'Cancelled'),
                                ('confirmed','Confirmed'),],default='cancelled',string='Status')
+
 
     @api.onchange('accommodation_id')
     def _onchange_accommodation_id(self):
