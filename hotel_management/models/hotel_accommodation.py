@@ -12,7 +12,6 @@ class HotelAccommodation(models.Model):
     _rec_name = 'booking_reference'
 
     today = fields.Date.today()
-    tomorrow = today+timedelta(days=1)
 
     guest_id = fields.Many2one('res.partner',string='Guest Name', required=True)
     number_of_guests = fields.Integer(string='Number of Guests', default=1)
@@ -68,7 +67,7 @@ class HotelAccommodation(models.Model):
         for val in vals:
             if val.get('booking_reference', _('New')) == _('New'):
                 val['booking_reference'] = self.env['ir.sequence'].next_by_code('hotel.accommodation')
-            return super(HotelAccommodation, self).create(vals)
+        return super(HotelAccommodation, self).create(vals)
 
     def check_in_action(self):
         """Performing the checkout button action
@@ -188,18 +187,23 @@ class HotelAccommodation(models.Model):
         """Update room rent automatically
         current date and check_in_date is used
         return the room rent till current date"""
-        date_today = fields.Datetime.today()
-        if self.check_in_date:
-            total_days = (date_today - self.check_in_date).days
-            payments = self.env['hotel.payments'].search([('order_reference', '=', self.booking_reference)])
-            payments.write({
-                'quantity': total_days,
-                'subtotal': total_days * self.room_id.rent,
-            })
+        date_today = fields.Datetime.today().date()
+        bookings = self.env['hotel.accommodation'].search([('state', '=', 'check_in')])
+        for rec in bookings:
+            if rec.check_in_date.date():
+                if ((date_today - rec.check_in_date.date()).days) == 0:
+                    total_days=1
+                else:
+                    total_days = (date_today - rec.check_in_date.date()).days
+                payments = rec.env['hotel.payments'].search([('order_reference', '=', rec.booking_reference)])
+                payments.write({
+                    'quantity': total_days,
+                    'subtotal': total_days * rec.room_id.rent,
+                })
 
     @api.depends('invoice_id','invoice_id.payment_state')
     def _compute_invoice_payment_status(self):
-        """COmputing invoice paid status
+        """Computing invoice paid status
         using invoice id and payment state
         return invoice paid or not"""
         for rec in self:

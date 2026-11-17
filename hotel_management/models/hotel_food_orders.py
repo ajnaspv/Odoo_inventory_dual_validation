@@ -39,7 +39,7 @@ class HotelFoodOreders(models.Model):
         for val in vals:
             if val.get('food_order_reference', _('New')) == _('New'):
                 val['food_order_reference'] = self.env['ir.sequence'].next_by_code('hotel.food.orders')
-            return super(HotelFoodOreders, self).create(vals)
+        return super(HotelFoodOreders, self).create(vals)
 
     def food_order_confirm_action(self):
 

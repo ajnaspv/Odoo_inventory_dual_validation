@@ -6,7 +6,7 @@
     'author': "Ajnas P V",
     'license': 'LGPL-3',
     'data': [
-        'seurity/ir.access.csv',
+        'security/ir.access.csv',
         'views/hotel_rooms_views.xml',
         'views/hotel_facilities_views.xml',
         'views/hotel_rooms_facilities_views.xml',
@@ -23,8 +23,7 @@
         'views/hotel_food_order_lines_views.xml',
         'views/hotel_payments_views.xml',
         'data/ir_cron_data.xml',
-        'views/hotel_guest_res_partner_views.xml',
-
+        'views/res_partner_views.xml',
 
         'views/hotel_menus.xml',
     ]

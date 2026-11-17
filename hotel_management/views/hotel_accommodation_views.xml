@@ -100,8 +100,8 @@
                 <field name="booking_reference"/>
                 <separator/>
                 <filter string="Bookings" name="available" domain="[('state', '!=', 'cancelled')]"/>
-                <filter string="Check Out Today" name="check_out_date_today" domain="[('check_out_date_only', '=', 'today')]"/>
-                <filter string="Check In Today" name="check_in_date_today" domain="[('check_in_date_only', '=', 'today')]"/>
+                <filter string="Check Out Today" name="check_out_date_today" domain="[('check_out_date_only', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Check In Today" name="check_in_date_today" domain="[('check_in_date_only', '=', context_today().strftime('%Y-%m-%d'))]"/>
                 <filter string="Expected Checkout Tomorrow" name="expected_date_tomorrow" domain="[('expected_date', '=', 'today +1d')]"/>
                 <group>
                     <filter string="Room" name="room_id"

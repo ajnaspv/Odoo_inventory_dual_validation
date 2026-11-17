@@ -6,7 +6,7 @@
         <menuitem id="reception_menu" name="Reception" sequence="1">
             <menuitem id="hotel_accommodation_model" action="hotel_accommodation_action" name="Accommodation"/>
             <menuitem id="hotel_food_orders_model" action="hotel_food_orders_action" name="Order Food"/>
-            <menuitem id="hotel_guest_res_partner_model" action="hotel_guest_res_partner_action" name="Hotel Guests"/>
+            <menuitem id="hotel_res_partner_model" action="hotel_res_partner_action" name="Hotel Guests"/>
         </menuitem>
 
         <!--        Configuration Menu-->
