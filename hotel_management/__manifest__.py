@@ -24,6 +24,7 @@
         'views/hotel_payments_views.xml',
         'data/ir_cron_data.xml',
         'views/res_partner_views.xml',
+        'data/mail_template.xml',
 
         'views/hotel_menus.xml',
     ]
