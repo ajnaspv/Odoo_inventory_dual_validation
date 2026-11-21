@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="module_category_inventory_dual_validation" model="ir.module.category">
+        <field name="name">Inventory Dual Validation</field>
+        <field name="description">Helps you to add extra validation on inventory internal transfer.</field>
+        <field name="sequence">25</field>
+    </record>
+    <record id="inventory_dual_validation_privilege" model="res.groups.privilege">
+        <field name="name">Internal Transfer Dual Validation</field>
+        <field name="category_id" ref="module_category_inventory_dual_validation"/>
+    </record>
+    <record id="internal_transfer_staff_user" model="res.groups">
+        <field name="name">Staff User</field>
+        <field name="privilege_id" ref="inventory_dual_validation_privilege"/>
+        <field name="implied_ids" eval="[Command.link(ref('stock.group_stock_user'))]"/>
+        <field name="comment">Internal Transfer need approval.</field>
+
+    </record>
+    <record id="internal_transfer_approver" model="res.groups">
+        <field name="name">Approver</field>
+        <field name="privilege_id" ref="inventory_dual_validation_privilege"/>
+        <field name="implied_ids" eval="[Command.link(ref('stock.group_stock_manager'))]"/>
+        <field name="comment">Approve Staff Users internal transfers.</field>
+    </record>
+</odoo>
